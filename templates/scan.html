@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan du réseau</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(/static/reseau-1439222664.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    
+
+
+    
+    
+}
+
+.container {
+    padding: 20px;
+    border: 3px solid rgb(5, 185, 146);
+    border-radius: 5px;
+    backdrop-filter: blur(30px);
+    
+
+    
+}
+
+h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+    color: rgb(123, 208, 123);
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      border-bottom: 2.5px solid rgb(5, 185, 146);
+       padding-bottom: 5px;
+       margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: rgb(223, 251, 223);
+}
+
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+button {
+    background: rgb(54, 161, 75);
+    width: 100%;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+}
+button:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
+button:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+}
+
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+img {
+    height: 60px;
+    width: 180px;
+}
+
+.pages a {
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    
+}
+ul{
+list-style: none;
+
+margin-left: 5px;
+font-size: 17px;
+font-weight: bold;
+
+
+
+}
+li{
+color: green;
+margin:10px 0;
+height: 60px;
+width: 320px;
+background: rgb(202, 229, 202);
+cursor: pointer;
+position: relative;
+z-index: 2;
+padding-left: 30px;
+display: flex;
+align-items: center;
+}
+a{
+text-decoration: none;
+}
+li::before{
+content: '';
+position:absolute;
+top:0;
+left:0;
+height: 100%;
+width: 8px;
+background:green;
+transition: 0.5s;
+z-index: -1;
+}
+li:hover::before{
+width: 100%;
+
+
+}
+
+li:hover{
+color: rgb(202, 229, 202);
+transform: translateX(20px);
+}
+
+.actuel{
+color: rgb(202, 229, 202);
+transform: translateX(20px);
+background:green;
+
+}
+.p1 {
+
+width: 20%;
+float: left;
+height: 100vh; /* Cela garantit que la hauteur du conteneur est égale à la hauteur de la fenêtre visible */
+display: flex;
+position: fixed;
+align-items: center;
+
+}
+
+/* Styles pour la classe p2 */
+.p2 {
+
+float: right;
+width: 80%;
+height: 100vh; /* Cela garantit que la hauteur du conteneur est égale à la hauteur de la fenêtre visible */
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+
+p{
+background-color: white;
+text-align: center;
+padding:5px 0 ;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="p1">
+        
+        <ul>
+            <p><img src="/static/logo-ocp.png" alt=""></p>
+            <a href="#"><li class="actuel">Scan du réseau</li></a>
+            <a href="/"> <li>Configuration des Switchs</li></a>
+            <a href="/backupssh"><li>Backup de configutation SSH</li></a>
+      
+        </ul>
+
+    </div>
+   
+    
+    <div class="p2">
+        <div class="container">
+            <h2>Scan du réseau</h2>
+            <form method="POST" action="/scan">
+                <label for="adress">Donner l'address ip sous forme "X.X.X.X" :</label>
+                <input type="text" id="adress" name="adress">
+    
+                <label for="masque">Donner le masque de sous reseau sous forme "/X":</label>
+                <input type="text" id="masque" name="masque">
+    
+                <button type="submit">Scan</button>
+            </form>
+            <div id="result">
+                {% if result %}
+                    <!-- Afficher le résultat du scan ici sous forme de tableau 
+                    <pre>{{ result }}</pre>-->
+                    {{ result|safe }}
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
